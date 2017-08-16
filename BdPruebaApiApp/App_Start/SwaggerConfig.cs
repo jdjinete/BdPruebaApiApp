@@ -6,6 +6,7 @@ using Swashbuckle.Application;
 using Swashbuckle.Swagger;
 using WebActivatorEx;
 using BdPruebaApiApp;
+using System;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -100,7 +101,7 @@ namespace BdPruebaApiApp
                         // those comments into the generated docs and UI. You can enable this by providing the path to one or
                         // more Xml comment files.
                         //
-                        //c.IncludeXmlComments(GetXmlCommentsPath());
+                        c.IncludeXmlComments(GetXmlCommentsPath());
 
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.
@@ -187,11 +188,11 @@ namespace BdPruebaApiApp
                         //
                         //c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
                         // ***** Uncomment the following to enable the swagger UI *****
-                        /*
-                            })
+                        /**/
+                    })
                         .EnableSwaggerUi(c =>
                             {
-                        */
+                        
                         // Use the "InjectStylesheet" option to enrich the UI with one or more additional CSS stylesheets.
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
@@ -243,6 +244,11 @@ namespace BdPruebaApiApp
                         //c.EnableOAuth2Support("test-client-id", "test-realm", "Swagger UI");
                     });
         }
+
+        protected static string GetXmlCommentsPath()
+        {
+            return String.Format(@"{0}\bin\BdPruebaApiApp.xml", AppDomain.CurrentDomain.BaseDirectory);
+        }
     }
 
     /// <summary>
@@ -251,7 +257,7 @@ namespace BdPruebaApiApp
     /// call above that wires this Operation Filter into 
     /// the pipeline.
     /// </summary>
-    /*
+    /*    */
     internal class IncludeParameterNamesInOperationIdFilter : IOperationFilter
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
@@ -267,5 +273,5 @@ namespace BdPruebaApiApp
             }
         }
     }
-    */
+
 }
